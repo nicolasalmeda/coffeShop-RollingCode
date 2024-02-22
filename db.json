@@ -1,0 +1,48 @@
+{
+  "productos": [
+    {
+      "nombreProducto": "café",
+      "precio": 1500,
+      "categoria": "bebida caliente",
+      "descripcion_breve": "un rico cafecito",
+      "descripcion_amplia": "un rico cafecito",
+      "imagen": "url",
+      "disponible": true,
+      "id": "1"
+    },
+    {
+      "id": "53b9",
+      "nombreProducto": "té",
+      "precio": "500",
+      "imagen": "https://images.pexels.com/photos/2115256/pexels-photo-2115256.jpeg",
+      "categoria": "Infusiones",
+      "descripcion_breve": "sdfsd sdfsdfsdfsdf",
+      "descripcion_amplia": "sdfsdddddd ssssssssssssssssssssssssssssssss"
+    },
+    {
+      "id": "55f2",
+      "nombreProducto": "brownie",
+      "precio": "500",
+      "imagen": "https://images.pexels.com/photos/2067396/pexels-photo-2067396.jpeg",
+      "categoria": "dulce",
+      "descripcion_breve": "sldfjs dksdjflskdjfslkfjsd",
+      "descripcion_amplia": "sdkfjsldkfjsd flskdfjlskdfjslkdf slkdfjslkdf"
+    },
+    {
+      "id": "95a9",
+      "nombreProducto": "brownie con almendras",
+      "precio": "800",
+      "imagen": "https://images.pexels.com/photos/887853/pexels-photo-887853.jpeg",
+      "categoria": "dulce",
+      "descripcion_breve": "sdfsdf sdssssssssss",
+      "descripcion_amplia": "sdfjsdk ksdfjskdf ksdfjskdf"
+    }
+  ],
+  "usuarios": [
+    {
+      "email": "admin@mail.com",
+      "password": "123",
+      "id": "0d1f"
+    }
+  ]
+}
