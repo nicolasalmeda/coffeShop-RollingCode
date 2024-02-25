@@ -1,42 +1,88 @@
 import { Form, Button } from "react-bootstrap";
 import { useForm } from "react-hook-form";
-import { crearProductoAPI } from "../../../helpers/queries";
+import { crearProductoAPI, obtenerProductoPorIdAPI,editarProductoAPI } from "../../../helpers/queries";
+import { useParams,useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
+import { useEffect } from "react";
 
-const FormularioProducto = () => {
+const FormularioProducto = ({editar, titulo}) => {
   const {
     register,
     handleSubmit,
     formState: { errors },
-    reset
+    reset,
+    setValue
   } = useForm();
 
-  const onSubmit = async(producto) => {
-    console.log(producto);
-    //llamar a la funcion encargada de pedirle a la api crear un producto
-    const respuesta = await crearProductoAPI(producto);
-    //agregar un mensaje si el codigo es 201 todo salio bien, caso contrario mostrar un mensaje de que ocurrio un error
-    if(respuesta.status === 201){
-      Swal.fire({
-        title: "Producto creado",
-        text: `El producto "${producto.nombreProducto}" fue creado correctamente`,
-        icon: "success"
-      });
-      //limpiar el formulario
-      reset()
-    }else{
-      Swal.fire({
-        title: "Ocurrio un error",
-        text: `El producto "${producto.nombreProducto}" no pudo ser creado. Intenta esta operación en unos minutos.`,
-        icon: "error"
-      });
+  const { id } = useParams();
+  const inicio = useNavigate();
+
+  useEffect(() => {
+    if(editar){
+      cargarDatosProducto();
     }
-    console.log(respuesta);
+  },[])
+
+  const cargarDatosProducto = async () => {
+    const repuesta = await obtenerProductoPorIdAPI(id);
+    setValue('nombreProducto', repuesta.nombreProducto);
+    setValue('precio', repuesta.precio);
+    setValue('imagen', repuesta.imagen);
+    setValue('categoria', repuesta.categoria);
+    setValue('descripcion_breve', repuesta.descripcion_breve);
+    setValue('descripcion_amplia', repuesta.descripcion_amplia);
+  }
+
+  const onSubmit = async(producto) => {
+    if(editar){
+      //llamar a la funcion encargada de pedirle a la api editar un producto
+      producto = {...producto, id: id};
+      console.log(producto);
+      const respuesta = await editarProductoAPI(producto);
+      if(respuesta.status === 200){
+        Swal.fire({
+          title: "Producto editado",
+          text: `El producto "${producto.nombreProducto}" fue editado correctamente`,
+          icon: "success"
+        });
+        //limpiar el formulario
+        reset()
+      }else{
+        Swal.fire({
+          title: "Ocurrio un error",
+          text: `El producto "${producto.nombreProducto}" no pudo ser editado. Intenta esta operación en unos minutos.`,
+          icon: "error"
+        });
+      }
+      inicio("/");
+
+    }else{
+        //llamar a la funcion encargada de pedirle a la api crear un producto
+      const respuesta = await crearProductoAPI(producto);
+      //agregar un mensaje si el codigo es 201 todo salio bien, caso contrario mostrar un mensaje de que ocurrio un error
+      if(respuesta.status === 201){
+        Swal.fire({
+          title: "Producto creado",
+          text: `El producto "${producto.nombreProducto}" fue creado correctamente`,
+          icon: "success"
+        });
+        //limpiar el formulario
+        reset()
+      }else{
+        Swal.fire({
+          title: "Ocurrio un error",
+          text: `El producto "${producto.nombreProducto}" no pudo ser creado. Intenta esta operación en unos minutos.`,
+          icon: "error"
+        });
+      }
+
+      inicio("/");
+    }
   };
 
   return (
     <section className="container mainSection">
-      <h1 className="display-4 mt-5">Nuevo producto</h1>
+      <h1 className="display-4 mt-5">{titulo}</h1>
       <hr />
       <Form className="my-4" onSubmit={handleSubmit(onSubmit)}>
         <Form.Group className="mb-3" controlId="formNombreProdcuto">

@@ -1,11 +1,11 @@
 import { Button } from "react-bootstrap";
 import { eliminarProductoAPI, obtenerProductosAPI } from "../../../helpers/queries";
 import Swal from "sweetalert2";
+import { Link } from "react-router-dom";
 
 const ItemProducto = ({producto,setProductos}) => {
 
   const eliminarProducto = async (id) => {
-    // const respuesta = await eliminarProductoAPI(id);
     Swal.fire({
       title: "Estas seguro?",
       text: "No puedes revertir esto!",
@@ -52,9 +52,11 @@ const ItemProducto = ({producto,setProductos}) => {
       </td>
       <td>{producto.categoria}</td>
       <td className="text-center">
+        <Link to={`/administrador/editar/${producto.id}`}>
         <Button variant="warning" className="me-lg-2">
           <i className="bi bi-pencil-square"></i>
         </Button>
+        </Link>
         <Button variant="danger">
           <i className="bi bi-trash" onClick={() => eliminarProducto(producto.id)}></i>
         </Button>

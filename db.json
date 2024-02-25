@@ -1,13 +1,31 @@
 {
   "productos": [
     {
-      "id": "95a9",
       "nombreProducto": "brownie con almendras",
       "precio": "800",
       "imagen": "https://images.pexels.com/photos/887853/pexels-photo-887853.jpeg",
       "categoria": "dulce",
-      "descripcion_breve": "sdfsdf sdssssssssss",
-      "descripcion_amplia": "sdfjsdk ksdfjskdf ksdfjskdf"
+      "descripcion_breve": "brownies con chocolates",
+      "descripcion_amplia": "sdfjsdk ksdfjskdf ksdfjskdf",
+      "id": "95a9"
+    },
+    {
+      "nombreProducto": "Galletas",
+      "precio": "1500",
+      "imagen": "https://www.elmundoeats.com/wp-content/uploads/2020/11/FP-Nutella-stuffed-chocolate-chunk-cookies.jpg",
+      "categoria": "dulce",
+      "descripcion_breve": "galletas de nutella",
+      "descripcion_amplia": "galletas con relleno de nutella y chispas de chocolates horneadas en la casa",
+      "id": "86af"
+    },
+    {
+      "nombreProducto": "Cafe",
+      "precio": "500",
+      "imagen": "https://www.somoselcafe.com.ar/img/novedades/87.jpg",
+      "categoria": "Infusiones",
+      "descripcion_breve": "taza de cafe",
+      "descripcion_amplia": "taza de cafe con cafe recien molido de la casa y ademas es rico pero caro",
+      "id": "a6a8"
     }
   ],
   "usuarios": [
