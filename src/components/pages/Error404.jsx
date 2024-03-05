@@ -1,9 +1,20 @@
+import error from "../../assets/error404.png";
+import { Button } from "react-bootstrap";
+import { Link } from "react-router-dom";
+
 const Error404 = () => {
-    return (
+
+
+  return (
+    <div className="myMain text text-center p-1">
         <div>
-            <p>aqui va la pagina de error 404</p>
+            <img src={error} alt="Imagen del error 404" className="img-fluid" />
         </div>
-    );
+    <Link to="/">
+        <Button className="m-1" variant="success">Volver a Inicio</Button>
+    </Link>
+    </div>
+  );
 };
 
 export default Error404;

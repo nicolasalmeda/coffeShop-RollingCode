@@ -44,20 +44,38 @@ export const eliminarProductoAPI = async (id) => {
 
 // EDIT
 
+// export const editarProductoAPI = async (productoEditado) => {
+//   try {
+//     const respuesta = await fetch(`${URI_Producto}/${productoEditado.id}`, {
+//         method: "PUT",
+//         headers:{
+//             "Content-Type": "application/json"
+//         },
+//         body: JSON.stringify(productoEditado)
+//     });
+//     console.log(respuesta)
+//     return respuesta
+//   } catch (error) {
+//     console.log(error);
+//   }
+// }
+
 export const editarProductoAPI = async (productoEditado) => {
   try {
     const respuesta = await fetch(`${URI_Producto}/${productoEditado.id}`, {
-        method: "PUT",
-        headers:{
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify(productoEditado)
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(productoEditado),
     });
-    return respuesta
+    console.log(respuesta);
+    return respuesta;
   } catch (error) {
-    console.log(error);
+    console.error(error);
+    throw new Error("Error al realizar la solicitud de edición");
   }
-}
+};
 
 // GET BY ID
 

@@ -20,7 +20,6 @@ const Inicio = () => {
     obtenerProductos();
   }, []);
 
-  console.log(productos);
   return (
     <>
       <img
