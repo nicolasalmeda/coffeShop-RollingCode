@@ -31,7 +31,7 @@
   "usuarios": [
     {
       "email": "admin@mail.com",
-      "password": "123",
+      "password": "12345",
       "id": "0d1f"
     }
   ]

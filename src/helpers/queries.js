@@ -88,3 +88,18 @@ export const obtenerProductoPorIdAPI = async (id) => {
     console.log(error);
   }
 }
+
+const userAdmin={
+  email: "admin@rollingcoffee.com",
+  password: "123Aa1233"
+}
+
+export const iniciarSesion = (usuario)=>{
+ if(usuario.email === userAdmin.email && usuario.password === userAdmin.password){
+  //loguear al usuario
+  sessionStorage.setItem('loginRollingCoffee', JSON.stringify(userAdmin.email));
+  return true;
+ }else{
+  return false;
+ }
+}

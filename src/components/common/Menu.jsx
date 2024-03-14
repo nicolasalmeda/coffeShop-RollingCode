@@ -1,7 +1,13 @@
-import  {Navbar, Nav, Container} from "react-bootstrap";
+import  {Navbar, Nav, Container, Button} from "react-bootstrap";
 import { Link, NavLink } from "react-router-dom";
 import logo from '../../assets/Coffee_Logo.png'
-const Menu = () => {
+const Menu = ({usuarioLogueado, setUsuarioLogueado}) => {
+
+  const logout = () => {
+    sessionStorage.removeItem('usuario');
+    setUsuarioLogueado("")
+  }
+
   return (
     <Navbar expand="lg" className="bg-body-tertiary">
       <Container>
@@ -12,9 +18,17 @@ const Menu = () => {
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="ms-auto">
             <NavLink end to='/' className='nav-link'>Inicio</NavLink>
-            <NavLink end to='/administrador' className='nav-link'>Administrador</NavLink>
             <NavLink end to='/registro' className='nav-link'>Registro</NavLink>
-            <NavLink end to='/login' className='nav-link'>Login</NavLink>
+            {
+              usuarioLogueado.length > 0 ? (
+                <>
+                  <NavLink end to="/administrador" className='nav-link'>Administrador</NavLink>
+                  <Button onClick={logout} variant="outline-danger">Cerrar sesión</Button>
+                </>
+              ) : (
+                <NavLink end to='/login' className='nav-link'>Login</NavLink>
+              )
+            }
           </Nav>
         </Navbar.Collapse>
       </Container>

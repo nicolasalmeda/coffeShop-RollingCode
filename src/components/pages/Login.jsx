@@ -1,9 +1,12 @@
 import React from 'react'
 import { Form, Button } from 'react-bootstrap'
 import { useForm } from "react-hook-form";
+import { useNavigate } from "react-router";
+import { iniciarSesion } from '../../helpers/queries';
+import Swal from "sweetalert2";
 import "../../css/login.css"
 
-const Login = () => {
+const Login = ({setUsuarioLogueado}) => {
   const {
     register,
     handleSubmit,
@@ -11,27 +14,26 @@ const Login = () => {
     reset
   } = useForm();
 
-  const onSubmit = async(producto) => {
-    console.log(producto);
-    //llamar a la funcion encargada de pedirle a la api crear un producto
-    const respuesta = await crearProductoAPI(producto);
-    //agregar un mensaje si el codigo es 201 todo salio bien, caso contrario mostrar un mensaje de que ocurrio un error
-    if(respuesta.status === 201){
+  const navegacion = useNavigate();
+
+  const onSubmit = (usuario) => {
+    console.log(usuario)
+    //pedir a la api verificar si existe ese usuario
+    if(iniciarSesion(usuario)){
       Swal.fire({
-        title: "Producto creado",
-        text: `El producto "${producto.nombreProducto}" fue creado correctamente`,
-        icon: "success"
+        title: "Bienvenido",
+        text: `Ingresaste al sistema rollingCoffee`,
+        icon: "success",
       });
-      //limpiar el formulario
-      reset()
+      setUsuarioLogueado(usuario.email)
+      navegacion('/administrador')
     }else{
       Swal.fire({
         title: "Ocurrio un error",
-        text: `El producto "${producto.nombreProducto}" no pudo ser creado. Intenta esta operación en unos minutos.`,
-        icon: "error"
+        text: `campo/s invalido/s`,
+        icon: "error",
       });
     }
-    console.log(respuesta);
   };
 
   return (
@@ -73,14 +75,14 @@ const Login = () => {
                 value: 5,
                 message: "Debe ingresar una contraseña mayor a 5 caracteres",
               },
-              max: {
+              maxLength: {
                 value: 20,
                 message: "Debe ingresar una contraseña menor a 20 caracteres",
               },
             })}
           />
           <Form.Text className="text-danger">
-            {errors.precio?.message}
+            {errors.password?.message}
           </Form.Text>
         </Form.Group>
         
